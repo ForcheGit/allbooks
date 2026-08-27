@@ -9,16 +9,22 @@ on:
 
 jobs:
   testes:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js 
-      uses: actions/setup-node@v4
-      with:
-        node-version: 24.
-        cache: 'npm'
-        cache-dependency-path: 'allbooks-aula-01/package-lock.json'
-    - run: npm install
-    - run: npm test
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: 'allbooks-aula-01/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./allbooks-aula-01
+        run: npm install
+
+      - name: Run tests
+        working-directory: ./allbooks-aula-01
+        run: npm test
